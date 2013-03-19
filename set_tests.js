@@ -58,7 +58,7 @@ function runTests(testArray, typeTest) {
     }
     if (errors)
         for (i = 0; i < errors.length; i++) {
-            console.log(typeTest + ' test ' + errors[i] +' (' + testArray.length + ') did not pass');
+            console.log(typeTest + ' test ' + errors[i] +' (' + (testArray.length - 1) + ') did not pass');
         }
     else
         console.log('All ' + typeTest + ' tests passed.');
@@ -119,15 +119,12 @@ for (var i = 0; i < 12; i++) {
 }
 // and should remove 12 cards from table.deck
 tableTests.push(assertEquals(testTable.Deck.deck.length, oldDeckLength - 12));
-// If 3 cards are removed from table.table, maintain should return the table to 12 cards
+// If 3 cards are removed from table.table, addThree should return the table to 12 cards
 for (var i = 0; i < 3; i++) {
     testTable.table.pop();
 }
-testTable.maintain();
+testTable.addThree();
 tableTests.push(assertEquals(testTable.table.length, 12));
-// If table.table has 12 cards and maintain is called with the extra parameter, table.table should have 15 cards
-testTable.maintain('extrarow');
-tableTests.push(assertEquals(testTable.table.length, 15));
 // If a card is removed from table.table, the resulting table should have a length of 1 less and not contain any undefined values
 var randCard = randomElement(testTable.table);
 var oldLength = testTable.table.length;
@@ -136,4 +133,74 @@ tableTests.push(assertEquals(testTable.table.length, oldLength - 1));
 for (var i = 0; i < testTable.table.length; i++) {
     tableTests.push(isACard(testTable.table[i]));  
 }
+// iterating over the table should return [card1, card2, card3], [card1, card2, card4], etc...
+var it = testTable.iterateTable();
+var state = it['state']
+for (var inc = 0; inc < 3; inc++) {
+    oldK = state.k;
+    var it = testTable.iterateTable(state);
+    state = it['state']
+    var kIncremented = (state.k > oldK);
+    tableTests.push(assertTrue(kIncremented));
+
+}
 console.log(runTests(tableTests, 'table'));
+
+
+// Set Testing
+setTests = [];
+var card1 = new Card();
+var card2 = new Card();
+var card3 = new Card();
+// allSame should return True if one value is the same for all cards
+card1.number = 1;
+card2.number = 1;
+card3.number = 1;
+setTests.push(allSame('number', card1, card2, card2));
+// and allDifferent should be false
+setTests.push(!allDifferent('number', card1, card2, card2));
+// allDifferent should return True if one value is different for all cards
+card1.shape = 0;
+card2.shape = 1;
+card3.shape = 2;
+setTests.push(allDifferent('shape', card1, card2, card3));
+// and allSame should be false
+setTests.push(!allSame('shape', card1, card2, card3));
+// isSet should return true for cards whose aspects are all the same/different
+setTests.push(isSet(card1, card2, card3))
+// isSet should return false if an attribute is the same for two cards but different for the third
+card1.colour = 0;
+card2.colour = 0;
+card3.colour = 2;
+setTests.push(!isSet(card1, card2, card3));
+
+console.log(runTests(setTests, 'set'));
+
+
+// Computer AI Testing
+computerAITests = [];
+var setTable = new Table();
+setTable.setUp();
+var card1 = new Card();
+var card2 = new Card();
+var card3 = new Card();
+// getSet should return the first three cards that form a set
+card1.number = card2.number = card3.number = 1;
+card1.shape = card2.shape = card3.shape = 1;
+card1.shading = card2.shading = card3.shading = 2;
+card1.colour = card2.colour = card3.colour = 0;
+setTable.table[0] = card1;
+setTable.table[1] = card2;
+setTable.table[2] = card3;
+computerAITests.push(assertTrue(getSet(setTable)));
+// getSet should return false if no sets exists
+noSet = new Table();
+card1.number = 2;
+noSet.table[0] = card1;
+noSet.table[1] = card2;
+noSet.table[2] = card3;
+
+computerAITests.push(assertFalse(getSet(noSet)));
+
+
+console.log(runTests(computerAITests, 'computer'));

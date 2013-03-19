@@ -1,5 +1,5 @@
 // Playing the game
-var table = new Table();
+table = new Table();
 table.setUp();
 
 // Create and add table div
@@ -11,6 +11,8 @@ document.body.appendChild(tableDiv);
 // Clicked cards & score -- global variable
 clickedCards = [];
 score = 0;
+
+
 // if clickedCards has a length of 3
 // check to see whether the cards constitute a set
 // if so, increment the user score, set clickedCards to [], remove those three cards from the table, and deal three new cards

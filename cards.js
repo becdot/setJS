@@ -52,6 +52,7 @@ Deck.prototype.deal = function() {
 function Table() {
     this.table = [];
     this.clickedCards = [];
+    this.score = 0;
     this.Deck = new Deck();
     this.Deck.setUp();
 }

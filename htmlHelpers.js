@@ -69,7 +69,13 @@ function unhighlightAllCards(tableNode) {
     parentNode.appendChild(table);
 }
 
-function whenCardClicked(cardNode) {
+function whenCardClicked2(cardNode) {
+    var card = nodeToCard(cardNode);
+    table.addCard(card);
+}
+
+function whenCardClicked(event) {
+    var cardNode = event.target;
     var index;
     var card1, card2, card3;
     // if card has already been clicked on, remove it from the list of clicked cards
@@ -94,6 +100,7 @@ function whenCardClicked(cardNode) {
         if (isSet(card1, card2, card3)) {
             alert('That is a set!');
             score += 1;
+            console.log('score', score);
         } else {
             alert('That is not a set.'); 
         }
@@ -103,10 +110,7 @@ function whenCardClicked(cardNode) {
 }
 
 function addCardClick(cardNode) {
-    var cardNum = getAttrFromCardNode(cardNode, 'number');
-    var cardShape = getAttrFromCardNode(cardNode, 'shape');
-    cardNode.addEventListener('click', 
-        function(){whenCardClicked(cardNode)});
+    cardNode.addEventListener('click', whenCardClicked);
 }
 
 function addCardsToDOM(parentElement, cards) {

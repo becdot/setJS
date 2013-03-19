@@ -8,3 +8,4 @@ Questions
   - what does the syntax `var anchor, fragment = document.createDocumentFragment();` mean?
   - forEach vs. for (var i = 0; i < array.length; i++) vs. for (i in array)?
   - why can't I set attributes for DOM nodes like element.class = 'card'?
+    - way to do this without setting it on the html?

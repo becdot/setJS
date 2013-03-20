@@ -1,19 +1,24 @@
 // Sets
-function allSame(attr, card1, card2, card3) {
+function allSame(attr, threeCards) {
+    var card1 = threeCards[0];
+    var card2 = threeCards[1];
+    var card3 = threeCards[2];
     if (card1[attr] === card2[attr] && card2[attr] === card3[attr] && card3[attr] === card1[attr])
         return true;
     return false;
 }
-function allDifferent(attr, card1, card2, card3) {
-    // console.log('all different:', (card1[attr] !== card2[attr] && card2[attr] !== card3[attr] && card3[attr] !== card1[attr]));
+function allDifferent(attr, threeCards) {
+    var card1 = threeCards[0];
+    var card2 = threeCards[1];
+    var card3 = threeCards[2];
     if (card1[attr] !== card2[attr] && card2[attr] !== card3[attr] && card3[attr] !== card1[attr])
         return true;
     return false;
 }
-function isSet(card1, card2, card3) {
+function isSet(threeCards) {
     for (var i = 0; i < 4; i++) {
         attr = cardValues[i];
-        if (!(allSame(attr, card1, card2, card3) || allDifferent(attr, card1, card2, card3)))
+        if (!(allSame(attr, threeCards) || allDifferent(attr, threeCards)))
             return false;
     }
     return true;
@@ -26,7 +31,7 @@ function getSet(table) {
         it = table.iterateTable(state);
         state = it.state;
         cards = it.result;
-        if (isSet(cards[0], cards[1], cards[2])) {
+        if (isSet(cards)) {
             return cards;
         }
     }

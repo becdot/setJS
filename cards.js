@@ -93,6 +93,18 @@ Table.prototype.addThree = function() {
     }
 };
 
+Table.prototype.clickCard = function(card) {
+    this.clickedCards.push(card);
+}
+Table.prototype.unclickCard = function(card) {
+    var index;
+    if ((index = this.clickedCards.indexOf(card)) != -1)
+        this.clickedCards.splice(index, 1);
+}
+Table.prototype.unclickAllCards = function() {
+    this.clickedCards = [];
+}
+
 Table.prototype.iterateTable = function(state) {
     var iUpperBound = this.table.length - 3;
     var jUpperBound = this.table.length - 2;

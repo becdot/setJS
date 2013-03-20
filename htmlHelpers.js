@@ -26,6 +26,15 @@ function cardToNode(card) {
 
 }
 
+function removeClassFromNode(className, cardNode) {
+    var oldClasses = cardNode.getAttribute('class').split(' ');
+    var index = oldClasses.indexOf(className);
+    if (index != -1)
+        oldClasses.splice(index, 1);
+    var newClasses = oldClasses.join(' ');
+    cardNode.setAttribute('class', newClasses);
+}
+
 function highlightCard(cardNode) {
     var oldClasses = cardNode.getAttribute('class');
     var newClasses = oldClasses + ' selected'
@@ -34,16 +43,6 @@ function highlightCard(cardNode) {
 
 function unhighlightCard(cardNode) {
     removeClassFromNode('selected', cardNode);
-}
-
-function removeClassFromNode(className, cardNode) {
-    var oldClasses = cardNode.getAttribute('class').split(' ');
-    var index = oldClasses.indexOf(className);
-    if (index != -1) {
-        oldClasses.splice(index, 1);
-    }
-    var newClasses = oldClasses.join(' ');
-    cardNode.setAttribute('class', newClasses);
 }
 
 function unhighlightAllCards(tableNode) {
@@ -56,30 +55,34 @@ function unhighlightAllCards(tableNode) {
     parentNode.appendChild(table);
 }
 
+function checkTableForSet() {
+    if (isSet(table.clickedCards)) {
+        alert('That is a set!');
+        table.score += 1;
+        console.log('score', table.score);
+    } else {
+        alert('That is not a set.'); 
+    }
+}
+
 function whenCardClicked(card) {
     return function(event) {
         var cardNode = event.currentTarget;
         var index;
         // if card has already been clicked on, remove it from the list of clicked cards
-        if ((index = clickedCards.indexOf(card)) != -1) {
+        if ((index = table.clickedCards.indexOf(card)) != -1) {
             unhighlightCard(cardNode);
-            clickedCards.splice(index, 1);
+            table.unclickCard(card);
         } else {
             highlightCard(cardNode);
-            clickedCards.push(card);
+            table.clickCard(card);
         }
         // if the list has two cards already, add the third card and check to see whether it is a set
         // afterwards, unlightlight all cards and clear the list of clicked cards
-        if (clickedCards.length === 3) {
-            if (isSet(clickedCards[0], clickedCards[1], clickedCards[2])) {
-                alert('That is a set!');
-                score += 1;
-                console.log('score', score);
-            } else {
-                alert('That is not a set.'); 
-            }
+        if (table.clickedCards.length === 3) {
+            checkTableForSet()
             unhighlightAllCards(cardNode.parentNode);
-            clickedCards = [];
+            table.unclickAllCards();
         }
     }
 }

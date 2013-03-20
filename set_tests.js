@@ -152,27 +152,28 @@ setTests = [];
 var card1 = new Card();
 var card2 = new Card();
 var card3 = new Card();
+var threeCards = [card1, card2, card3];
 // allSame should return True if one value is the same for all cards
 card1.number = 1;
 card2.number = 1;
 card3.number = 1;
-setTests.push(allSame('number', card1, card2, card2));
+setTests.push(allSame('number', threeCards));
 // and allDifferent should be false
-setTests.push(!allDifferent('number', card1, card2, card2));
+setTests.push(!allDifferent('number', threeCards));
 // allDifferent should return True if one value is different for all cards
 card1.shape = 0;
 card2.shape = 1;
 card3.shape = 2;
-setTests.push(allDifferent('shape', card1, card2, card3));
+setTests.push(allDifferent('shape', threeCards));
 // and allSame should be false
-setTests.push(!allSame('shape', card1, card2, card3));
+setTests.push(!allSame('shape', threeCards));
 // isSet should return true for cards whose aspects are all the same/different
-setTests.push(isSet(card1, card2, card3))
+setTests.push(isSet(threeCards))
 // isSet should return false if an attribute is the same for two cards but different for the third
 card1.colour = 0;
 card2.colour = 0;
 card3.colour = 2;
-setTests.push(!isSet(card1, card2, card3));
+setTests.push(!isSet(threeCards));
 
 console.log(runTests(setTests, 'set'));
 

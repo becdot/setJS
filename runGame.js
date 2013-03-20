@@ -8,9 +8,6 @@ tableDiv.setAttribute('class', 'table');
 // Create and add cards in table.table to the document body
 addCardsToDOM(tableDiv, table.table);
 document.body.appendChild(tableDiv);
-// Clicked cards & score -- global variable
-clickedCards = [];
-score = 0;
 
 
 // if clickedCards has a length of 3

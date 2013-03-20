@@ -74,8 +74,15 @@ function whenCardClicked2(cardNode) {
     table.addCard(card);
 }
 
+// When a card is click, toggle the class "selected" (or some varient) and then
+// send the card's ID  to the table
+// function that handles a clicked card and manages the clicked cards list.
+// That function will live on the table prototype and take a card ID.and then either add or remove
+// the card from the "selected" list.
+// That list length can never exceed 3
+
 function whenCardClicked(event) {
-    var cardNode = event.target;
+    var cardNode = event.currentTarget;
     var index;
     var card1, card2, card3;
     // if card has already been clicked on, remove it from the list of clicked cards

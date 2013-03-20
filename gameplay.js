@@ -32,6 +32,7 @@ function getSet(table) {
         state = it.state;
         cards = it.result;
         if (isSet(cards)) {
+            console.log(state);
             return cards;
         }
     }

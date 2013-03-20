@@ -57,9 +57,12 @@ function unhighlightAllCards(tableNode) {
 
 function checkTableForSet() {
     if (isSet(table.clickedCards)) {
-        alert('That is a set!');
+        alert('That is a set!'); 
         table.score += 1;
         console.log('score', table.score);
+        table.removeCards(table.clickedCards);
+        table.addThree();
+
     } else {
         alert('That is not a set.'); 
     }
@@ -77,12 +80,12 @@ function whenCardClicked(card) {
             highlightCard(cardNode);
             table.clickCard(card);
         }
-        // if the list has two cards already, add the third card and check to see whether it is a set
-        // afterwards, unlightlight all cards and clear the list of clicked cards
         if (table.clickedCards.length === 3) {
-            checkTableForSet()
+            checkTableForSet();
             unhighlightAllCards(cardNode.parentNode);
             table.unclickAllCards();
+            document.body.removeChild(cardNode.parentNode);
+            addCardsToDOM(table.table);         
         }
     }
 }
@@ -91,12 +94,14 @@ function addCardClick(cardNode, card) {
     cardNode.addEventListener('click', whenCardClicked(card));
 }
 
-function addCardsToDOM(parentElement, cards) {
+function addCardsToDOM(cards) {
+    var tableDiv = dom('div', {'class': 'table', 'id': 'table'}, []);
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < cards.length; i++) {
         cardNode = cardToNode(cards[i]);
         addCardClick(cardNode, cards[i]);
         fragment.appendChild(cardNode);
     }
-    parentElement.appendChild(fragment);
+    tableDiv.appendChild(fragment);
+    document.body.appendChild(tableDiv);    
 }

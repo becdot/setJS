@@ -128,7 +128,7 @@ tableTests.push(assertEquals(testTable.table.length, 12));
 // If a card is removed from table.table, the resulting table should have a length of 1 less and not contain any undefined values
 var randCard = randomElement(testTable.table);
 var oldLength = testTable.table.length;
-testTable.removeCard(randCard);
+testTable.removeCards([randCard]);
 tableTests.push(assertEquals(testTable.table.length, oldLength - 1));
 for (var i = 0; i < testTable.table.length; i++) {
     tableTests.push(isACard(testTable.table[i]));  

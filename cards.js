@@ -81,10 +81,12 @@ Table.prototype.setUp = function() {
         this.dealCard();
     }  
 };
-Table.prototype.removeCard = function(card) {
-    var cardIndex = this.table.indexOf(card);
-    if (cardIndex !== -1) {
-        this.table.splice(cardIndex, 1);
+Table.prototype.removeCards = function(cardList) {
+    for (var i = 0; i < cardList.length; i++) {
+        var cardIndex = this.table.indexOf(cardList[i]);
+        if (cardIndex !== -1) {
+            this.table.splice(cardIndex, 1);
+        }
     }
 };
 Table.prototype.addThree = function() {

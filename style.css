@@ -48,3 +48,6 @@ body, html {
 .card.purple.transparent {
     background-color: rgba(128, 0, 128, .2);
 }
+.card.selected {
+    font-weight: 900;
+}

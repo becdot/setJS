@@ -17,114 +17,82 @@ function dom(name, attributes, childrenList) {
     return node;
 }
 
-function getCardCSSClasses(card) {
-    classes = ['card'];
-    for (var i = 0; i < cardValues.length; i++) {
-        var attr = cardValues[i];
-        classes.push(cardValuesDic[attr][card[attr]]);
-    }
-    return classes;
-}
-
-function cardToNode(card, cardNum) {
-    var CSSClasses = getCardCSSClasses(card).join(' ');
+function cardToNode(card) {
+    var CSSClasses = ['card'].concat(card.getValues()).join(' ');
     var numberNode = dom('p', null, ['Number: ' + card['number']]);
-    var shapeNode = dom('p', null, ['Shape: ' + cardValuesDic['shape'][card['shape']]])
-    var pNodes = [numberNode, shapeNode];
-    var node = dom('div', {'class': CSSClasses}, pNodes);
+    var shapeNode = dom('p', null, ['Shape: ' + card.getValues('shape')]);
+    var node = dom('div', {'class': CSSClasses}, [numberNode, shapeNode]);
     return node
 
 }
 
-function getAttrFromCardNode(cardNode, attr) {
-    var children = cardNode.children;
-    for (var i = 0; i < children.length; i++) {
-        var text = children[i].innerText.split(': ');
-        if (text[0].toLowerCase() === attr) {
-            return text[1];
-        }
-    }
-}
-
-function nodeToCard(cardNode) {
-    var newCard = new Card();
-    for (var i = 0; i < cardValues.length; i++) {
-        var attr = cardValues[i];
-        newCard[attr] = getAttrFromCardNode(cardNode, attr);
-    }
-    return newCard;
-}
-
 function highlightCard(cardNode) {
-    cardNode.style['font-weight'] = 900;
+    var oldClasses = cardNode.getAttribute('class');
+    var newClasses = oldClasses + ' selected'
+    cardNode.setAttribute('class', newClasses);
+}
+
+function unhighlightCard(cardNode) {
+    removeClassFromNode('selected', cardNode);
+}
+
+function removeClassFromNode(className, cardNode) {
+    var oldClasses = cardNode.getAttribute('class').split(' ');
+    var index = oldClasses.indexOf(className);
+    if (index != -1) {
+        oldClasses.splice(index, 1);
+    }
+    var newClasses = oldClasses.join(' ');
+    cardNode.setAttribute('class', newClasses);
 }
 
 function unhighlightAllCards(tableNode) {
     var parentNode = tableNode.parentNode;
     var table = parentNode.removeChild(tableNode);
-    var cards = table.getElementsByClassName('card');
-    for (var i = 0; i < cards.length; i++) {
-        cards[i].style['font-weight'] = 400;
+    var cardNodes = table.getElementsByClassName('card');
+    for (var i = 0; i < cardNodes.length; i++) {
+        unhighlightCard(cardNodes[i]);
     }
     parentNode.appendChild(table);
 }
 
-function whenCardClicked2(cardNode) {
-    var card = nodeToCard(cardNode);
-    table.addCard(card);
-}
-
-// When a card is click, toggle the class "selected" (or some varient) and then
-// send the card's ID  to the table
-// function that handles a clicked card and manages the clicked cards list.
-// That function will live on the table prototype and take a card ID.and then either add or remove
-// the card from the "selected" list.
-// That list length can never exceed 3
-
-function whenCardClicked(event) {
-    var cardNode = event.currentTarget;
-    var index;
-    var card1, card2, card3;
-    // if card has already been clicked on, remove it from the list of clicked cards
-    if (cardNode.style['font-weight'] === '900') {
-        index = clickedCards.indexOf(cardNode);
-        clickedCards.splice(index, 1);
-        cardNode.style['font-weight'] = 400;
-    }
-    // if the list of clicked cards < 2, add it to the list
-    else if (clickedCards.length < 2) {
-        highlightCard(cardNode);
-        clickedCards.push(cardNode);
-    }
-    // if the list has two cards already, add the third card and check to see whether it is a set
-    // afterwards, unlightlight all cards and clear the list of clicked cards
-    else if (clickedCards.length === 2) {
-        highlightCard(cardNode);
-        clickedCards.push(cardNode);
-        card1 = nodeToCard(clickedCards[0]);
-        card2 = nodeToCard(clickedCards[1]);
-        card3 = nodeToCard(clickedCards[2]);
-        if (isSet(card1, card2, card3)) {
-            alert('That is a set!');
-            score += 1;
-            console.log('score', score);
+function whenCardClicked(card) {
+    return function(event) {
+        var cardNode = event.currentTarget;
+        var index;
+        // if card has already been clicked on, remove it from the list of clicked cards
+        if ((index = clickedCards.indexOf(card)) != -1) {
+            unhighlightCard(cardNode);
+            clickedCards.splice(index, 1);
         } else {
-            alert('That is not a set.'); 
+            highlightCard(cardNode);
+            clickedCards.push(card);
         }
-        unhighlightAllCards(cardNode.parentNode);
-        clickedCards = [];
+        // if the list has two cards already, add the third card and check to see whether it is a set
+        // afterwards, unlightlight all cards and clear the list of clicked cards
+        if (clickedCards.length === 3) {
+            if (isSet(clickedCards[0], clickedCards[1], clickedCards[2])) {
+                alert('That is a set!');
+                score += 1;
+                console.log('score', score);
+            } else {
+                alert('That is not a set.'); 
+            }
+            unhighlightAllCards(cardNode.parentNode);
+            clickedCards = [];
+        }
     }
 }
 
-function addCardClick(cardNode) {
-    cardNode.addEventListener('click', whenCardClicked);
+function addCardClick(cardNode, card) {
+    cardNode.addEventListener('click', whenCardClicked(card));
 }
 
 function addCardsToDOM(parentElement, cards) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < cards.length; i++) {
-        cardNode = cardToNode(cards[i], i);
-        addCardClick(cardNode);
+        cardNode = cardToNode(cards[i]);
+        addCardClick(cardNode, cards[i]);
         fragment.appendChild(cardNode);
     }
     parentElement.appendChild(fragment);

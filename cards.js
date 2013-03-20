@@ -3,6 +3,7 @@ var cardValues = ['number', 'colour', 'shading', 'shape']
 var cardValuesDic = {'number': {1: 'one', 2: 'two', 3: 'three'}, 'colour': {0: 'red', 1: 'purple', 2: 'green'},
                     'shading': {0: 'solid', 1: 'semi', 2: 'transparent'}, 'shape': {0: 'oval', 1: 'diamond', 2: 'squiggle'}};
 function Card() {
+    this.id = null;
     for (var i in cardValues) {
         this[cardValues[i]] = null;
     }
@@ -11,6 +12,20 @@ Card.prototype.setRandomValues = function() {
     this.number = randomElement([1, 2, 3]);
     for (var i = 1; i < 4; i++) {
         this[cardValues[i]] = randomElement([0, 1, 2]);
+    }
+};
+Card.prototype.getValues = function() {
+    if (arguments.length === 0) {
+        var classes = [];
+        for (var i = 0; i < cardValues.length; i++) {
+            var attr = cardValues[i];
+            classes.push(cardValuesDic[attr][this[attr]]);
+        }
+        return classes;
+    }
+    else {
+        var attr = arguments[0];
+        return cardValuesDic[attr][this[attr]];
     }
 };
 
@@ -40,6 +55,7 @@ Deck.prototype.setUp = function() {
         // way to have this set in one shot?  (have the Card initialisation set random values at start?)
         var card = new Card();
         card.setRandomValues();
+        card.id = i;
         this.deck.push(card);
     }
     this.shuffle();
@@ -57,7 +73,7 @@ function Table() {
     this.Deck.setUp();
 }
 Table.prototype.dealCard = function() {
-        var newCard = this.Deck.deal();
+    var newCard = this.Deck.deal();
     this.table.push(newCard);
 };
 Table.prototype.setUp = function() {

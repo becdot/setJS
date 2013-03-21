@@ -31,20 +31,11 @@ function getSet(table) {
         it = table.iterateTable(state);
         state = it.state;
         cards = it.result;
-        if (isSet(cards)) {
-            console.log(state);
+        if (cards[0] && cards[1] && cards[2] && isSet(cards)) {
+            console.log('found a set at ', state.i, state.j, state.k);
             return cards;
         }
     }
+    console.log('returning false');
     return false;
 }
-
-// // Gameplay
-// function determineSet(table, score, cardList) {
-//     if isSet(cardList[0], cardList[1], cardList[2]) {
-//         score++;
-//         for (index in cardList) {
-//             table.removeCard(cardList[index]);
-//         }
-//     }
-// }

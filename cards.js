@@ -15,16 +15,16 @@ Card.prototype.setRandomValues = function() {
     }
 };
 Card.prototype.getValues = function() {
+    var classes, attr;
     if (arguments.length === 0) {
-        var classes = [];
+        classes = [];
         for (var i = 0; i < cardValues.length; i++) {
-            var attr = cardValues[i];
+            attr = cardValues[i];
             classes.push(cardValuesDic[attr][this[attr]]);
         }
         return classes;
-    }
-    else {
-        var attr = arguments[0];
+    } else {
+        attr = arguments[0];
         return cardValuesDic[attr][this[attr]];
     }
 };
@@ -50,8 +50,8 @@ Deck.prototype.shuffle = function() {
         this.deck[randIndex] = card1;
     }  
 };
-Deck.prototype.setUp = function() {
-    for (var i = 0; i < 21; i++) {
+Deck.prototype.setUp = function(deckLength) {
+    for (var i = 0; i < deckLength; i++) {
         // way to have this set in one shot?  (have the Card initialisation set random values at start?)
         var card = new Card();
         card.setRandomValues();
@@ -61,20 +61,23 @@ Deck.prototype.setUp = function() {
     this.shuffle();
 };
 Deck.prototype.deal = function() {
-    return this.deck.pop();
+    if (this.deck)
+        return this.deck.pop();
 };
 
 // Table
-function Table() {
+function Table(deckLength) {
     this.table = [];
     this.clickedCards = [];
     this.score = 0;
+    this.computerScore = 0;
     this.Deck = new Deck();
-    this.Deck.setUp();
+    this.Deck.setUp(deckLength);
 }
 Table.prototype.dealCard = function() {
-    var newCard = this.Deck.deal();
-    this.table.push(newCard);
+    var newCard;
+    if ((newCard = this.Deck.deal()))
+        this.table.push(newCard);
 };
 Table.prototype.setUp = function() {
     for (var i = 0; i < 12; i++) {
@@ -94,7 +97,15 @@ Table.prototype.addThree = function() {
         this.dealCard();
     }
 };
-
+Table.prototype.updateAfterSet = function(cardList, winner) {
+    this.removeCards(cardList);
+    this.addThree();
+    if (winner === 'computer') {
+        this.computerScore += 1;
+    } else {
+        this.score += 1;
+    }
+};
 Table.prototype.clickCard = function(card) {
     this.clickedCards.push(card);
 }

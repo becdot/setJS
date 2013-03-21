@@ -9,3 +9,12 @@ Questions
   - forEach vs. for (var i = 0; i < array.length; i++) vs. for (i in array)?
   - why can't I set attributes for DOM nodes like element.class = 'card'?
     - way to do this without setting it on the html?
+
+
+
+To Do
+
+  - Computer highlights cards when it makes a move
+  - Highlighting = highlighting?
+  - Easy, medium, and hard modes (with html buttons)
+  - 

@@ -87,7 +87,7 @@ var testDeck = new Deck();
 // Deck.deck should start as an empty array
 deckTests.push(assertEquals(testDeck.deck.length, 0));
 // Deck.setUp() should populate the deck with 21 cards
-testDeck.setUp();
+testDeck.setUp(21);
 deckTests.push(assertEquals(testDeck.deck.length, 21));
 // Each of the cards should have values set
 for (var i = 0; i < testDeck.deck.length; i++) {
@@ -108,7 +108,7 @@ console.log(runTests(deckTests, 'deck'));
 
 // Testing -- Table
 var tableTests = []
-var testTable = new Table();
+var testTable = new Table(21);
 var oldDeckLength = testTable.Deck.deck.length;
 // setUp() should add 12 cards to table.table
 testTable.setUp();
@@ -180,7 +180,7 @@ console.log(runTests(setTests, 'set'));
 
 // Computer AI Testing
 computerAITests = [];
-var setTable = new Table();
+var setTable = new Table(21);
 setTable.setUp();
 var card1 = new Card();
 var card2 = new Card();
@@ -195,7 +195,7 @@ setTable.table[1] = card2;
 setTable.table[2] = card3;
 computerAITests.push(assertTrue(getSet(setTable)));
 // getSet should return false if no sets exists
-noSet = new Table();
+noSet = new Table(21);
 card1.number = 2;
 noSet.table[0] = card1;
 noSet.table[1] = card2;

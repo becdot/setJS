@@ -55,13 +55,36 @@ function unhighlightAllCards(tableNode) {
     parentNode.appendChild(table);
 }
 
-function checkTableForSet() {
-    if (isSet(table.clickedCards)) {
+function win() {
+    var gs, d;
+    console.log('get set', gs = getSet(table), Boolean(gs));
+    console.log('table deck', d = table.Deck.deck.length, Boolean(d));
+    console.log('deck is empty and no sets exists', !(table.Deck.deck.length || getSet(table)));
+    if (!(table.Deck.deck.length || getSet(table))) {
+        window.clearInterval(computerInterval);
+        console.log('cleared interval');
+        if (table.score > table.computerScore) {
+            alert('You won: ' + table.score + ' to ' + table.computerScore);
+        } else {
+            alert('The computer has won: ' + table.computerScore + ' to ' + table.score);
+        }
+    } else {
+        return false;
+    }
+}
+
+function updateDOMAfterSet(tableNode) {
+    document.body.removeChild(tableNode);
+    addCardsToDOM(table.table);
+}
+
+function checkTableForSet(clickedCards, tableNode) {
+    if (isSet(clickedCards)) {
         alert('That is a set!'); 
-        table.score += 1;
-        console.log('score', table.score);
-        table.removeCards(table.clickedCards);
-        table.addThree();
+        table.updateAfterSet(clickedCards);
+        console.log('score: ', table.score, '\n', 'computer score: ', table.computerScore);
+        updateDOMAfterSet(tableNode);
+        win();
 
     } else {
         alert('That is not a set.'); 
@@ -71,6 +94,7 @@ function checkTableForSet() {
 function whenCardClicked(card) {
     return function(event) {
         var cardNode = event.currentTarget;
+        var tableNode = cardNode.parentNode
         var index;
         // if card has already been clicked on, remove it from the list of clicked cards
         if ((index = table.clickedCards.indexOf(card)) != -1) {
@@ -81,11 +105,9 @@ function whenCardClicked(card) {
             table.clickCard(card);
         }
         if (table.clickedCards.length === 3) {
-            checkTableForSet();
-            unhighlightAllCards(cardNode.parentNode);
-            table.unclickAllCards();
-            document.body.removeChild(cardNode.parentNode);
-            addCardsToDOM(table.table);         
+            unhighlightAllCards(tableNode);
+            checkTableForSet(table.clickedCards, tableNode);
+            table.unclickAllCards();         
         }
     }
 }
@@ -104,4 +126,28 @@ function addCardsToDOM(cards) {
     }
     tableDiv.appendChild(fragment);
     document.body.appendChild(tableDiv);    
+}
+
+function computerMove() {
+    if (table) {
+        var move = getSet(table);
+        if (move) {
+            console.log('The computer got a set!');
+            table.updateAfterSet(move, 'computer');
+            console.log('score: ', table.score, '\n', 'computer score: ', table.computerScore);
+        } else {
+            table.addThree()
+        }
+        updateDOMAfterSet(document.getElementById('table'));
+        win();
+    }
+}
+
+function addAIToDOM(delayInSecs) {
+    computerInterval = window.setInterval(computerMove, delayInSecs * 1000);
+}
+
+function createDOM(cards, delayInSecs) {
+    addCardsToDOM(cards);
+    addAIToDOM(delayInSecs);
 }

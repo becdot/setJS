@@ -36,6 +36,5 @@ function getSet(table) {
             return cards;
         }
     }
-    console.log('returning false');
     return false;
 }

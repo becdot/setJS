@@ -56,13 +56,8 @@ function unhighlightAllCards(tableNode) {
 }
 
 function win() {
-    var gs, d;
-    console.log('get set', gs = getSet(table), Boolean(gs));
-    console.log('table deck', d = table.Deck.deck.length, Boolean(d));
-    console.log('deck is empty and no sets exists', !(table.Deck.deck.length || getSet(table)));
     if (!(table.Deck.deck.length || getSet(table))) {
         window.clearInterval(computerInterval);
-        console.log('cleared interval');
         if (table.score > table.computerScore) {
             alert('You won: ' + table.score + ' to ' + table.computerScore);
         } else {
@@ -82,7 +77,7 @@ function checkTableForSet(clickedCards, tableNode) {
     if (isSet(clickedCards)) {
         alert('That is a set!'); 
         table.updateAfterSet(clickedCards);
-        console.log('score: ', table.score, '\n', 'computer score: ', table.computerScore);
+        console.log(('score: ' + table.score + '\n', 'computer score: ' + table.computerScore));
         updateDOMAfterSet(tableNode);
         win();
 

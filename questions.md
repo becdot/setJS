@@ -9,6 +9,7 @@ Questions
   - forEach vs. for (var i = 0; i < array.length; i++) vs. for (i in array)?
   - why can't I set attributes for DOM nodes like element.class = 'card'?
     - way to do this without setting it on the html?
+  - in whenCardClicked closure, why is function able to have access to event?  Where does it get that, since event isn't passed in as a parameter?
 
 
 

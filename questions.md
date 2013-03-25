@@ -18,4 +18,5 @@ To Do
   - Computer highlights cards when it makes a move
   - Highlighting = highlighting?
   - Easy, medium, and hard modes (with html buttons)
+  - Resize properly with window resizing
   - 

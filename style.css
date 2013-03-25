@@ -1,15 +1,19 @@
 body, html {
     height: 100%;
 }
+body h1 {
+    text-align: center;
+}
 .table {
-    width: 75%;
+    width: 72%;
     height: 100%;
-    margin: auto;
+    margin-left: 10%;
+    margin-right: auto;
 }
 
 .card {
-    width: 25%;
-    height: 15%;
+    width: 28.5%;
+    height: 12%;
     float: left;
     text-align: center;
     display: table-cell;
@@ -50,4 +54,14 @@ body, html {
 }
 .card.selected {
     font-weight: 900;
+}
+
+.buttondiv {
+    float: right;
+    height: auto;
+    width: 15%;
+}
+button {
+    float: right;
+    width: 91%
 }

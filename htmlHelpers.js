@@ -58,7 +58,9 @@ function unhighlightAllCards(tableNode) {
 function win() {
     if (!(table.Deck.deck.length || getSet(table))) {
         window.clearInterval(computerInterval);
-        if (table.score > table.computerScore) {
+        if (table.score === table.computerScore) {
+            alert('You tied: ' + table.score + ' to ' + table.computerScore);
+        } else if (table.score > table.computerScore) {
             alert('You won: ' + table.score + ' to ' + table.computerScore);
         } else {
             alert('The computer has won: ' + table.computerScore + ' to ' + table.score);
@@ -77,7 +79,7 @@ function checkTableForSet(clickedCards, tableNode) {
     if (isSet(clickedCards)) {
         alert('That is a set!'); 
         table.updateAfterSet(clickedCards);
-        console.log(('score: ' + table.score + '\n', 'computer score: ' + table.computerScore));
+        console.log('score: ', table.score, '\n', 'computer score: ', table.computerScore);
         updateDOMAfterSet(tableNode);
         win();
 

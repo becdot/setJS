@@ -73,6 +73,7 @@ function Table(deckLength) {
     this.computerScore = 0;
     this.Deck = new Deck();
     this.Deck.setUp(deckLength);
+    this.difficulty = null;
 }
 Table.prototype.dealCard = function() {
     var newCard;

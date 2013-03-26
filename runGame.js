@@ -24,7 +24,8 @@ function startGame(table) {
         if ((tableNode = document.getElementById('table'))) {
             console.log('table has been previously created', table.difficulty);
             difficulty = table.difficulty;
-        } 
+            window.clearInterval(computerInterval);
+        }
         newTable = new Table(21);
         newTable.setUp();
         newTable.difficulty = table.difficulty || difficulty;

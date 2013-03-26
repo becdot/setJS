@@ -1,17 +1,21 @@
 // Card
 var cardValues = ['number', 'colour', 'shading', 'shape']
-var cardValuesDic = {'number': {1: 'one', 2: 'two', 3: 'three'}, 'colour': {0: 'red', 1: 'purple', 2: 'green'},
-                    'shading': {0: 'solid', 1: 'semi', 2: 'transparent'}, 'shape': {0: 'oval', 1: 'diamond', 2: 'squiggle'}};
+var cardValuesDic = {'number': {1: 'one', 2: 'two', 3: 'three'}, 'colour': {1: 'red', 2: 'purple', 3: 'green'},
+                    'shading': {1: 'solid', 2: 'semi', 3: 'transparent'}, 'shape': {1: 'oval', 2: 'diamond', 3: 'squiggle'}};
+var cardMultiples = {'number': 1, 'colour': 10, 'shading': 100, 'shape': 1000};
 function Card() {
     this.id = null;
+    this.sum = 0;
     for (var i in cardValues) {
         this[cardValues[i]] = null;
     }
 }
 Card.prototype.setRandomValues = function() {
-    this.number = randomElement([1, 2, 3]);
-    for (var i = 1; i < 4; i++) {
-        this[cardValues[i]] = randomElement([0, 1, 2]);
+    for (var i in cardValues) {
+        var random = randomElement([1, 2, 3]);
+        var attr = cardValues[i];
+        this[attr] = random;
+        this.sum += (cardMultiples[attr] * random);
     }
 };
 Card.prototype.getValues = function() {
@@ -31,8 +35,6 @@ Card.prototype.getValues = function() {
 
 // Randomness
 function randomElement(array) {
-    if (array.length === 0)
-        console.log('array is empty');
     var index = Math.floor(Math.random() * array.length);
     return array[index];
 }

@@ -1,25 +1,16 @@
 // Sets
-function allSame(attr, threeCards) {
-    var card1 = threeCards[0];
-    var card2 = threeCards[1];
-    var card3 = threeCards[2];
-    if (card1[attr] === card2[attr] && card2[attr] === card3[attr] && card3[attr] === card1[attr])
-        return true;
-    return false;
-}
-function allDifferent(attr, threeCards) {
-    var card1 = threeCards[0];
-    var card2 = threeCards[1];
-    var card3 = threeCards[2];
-    if (card1[attr] !== card2[attr] && card2[attr] !== card3[attr] && card3[attr] !== card1[attr])
-        return true;
-    return false;
-}
 function isSet(threeCards) {
-    for (var i = 0; i < 4; i++) {
-        attr = cardValues[i];
-        if (!(allSame(attr, threeCards) || allDifferent(attr, threeCards)))
+    if (threeCards.length !== 3) {
+        return false
+    }
+    var card1 = threeCards[0];
+    var card2 = threeCards[1];
+    var card3 = threeCards[2];
+    var sum = (card1.sum + card2.sum + card3.sum).toString();
+    for (var i = 0; i < sum.length; i++) {
+        if (sum[i] % 3 !== 0) {
             return false;
+        }
     }
     return true;
 }

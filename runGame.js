@@ -1,26 +1,7 @@
 // Playing the game
-function startGame() {
-    var tableNode, oldDifficulty;
-    if ((tableNode = document.getElementById('table'))) {
-        console.log('table has been previously created');
-        document.body.removeChild(tableNode);
-        var oldDifficulty = table.difficulty;
-        table = new Table(21);
-        table.setUp();
-        table.difficulty = oldDifficulty;
-        createDOM(table.table, table.difficulty);
 
-    } else {
-        if (table.difficulty === null) {
-            alert('Please choose a difficulty.');
-        } else {
-        createDOM(table.table, table.difficulty);
-        }
-    }
-}
-
-function difficulty() {
-    return function(event) {
+function difficulty(table) {
+    return function() {
         var buttonID = event.currentTarget.getAttribute('id');
         if (buttonID === 'hard') {
             table.difficulty = 15;
@@ -33,15 +14,33 @@ function difficulty() {
     }
 }
 
-function addDifficultyClicks() {
+function startGame(table) {
+    return function() {
+        var tableNode, difficulty, newTable;
+        if (table.difficulty === null) {
+            alert('Please choose a difficulty.');
+            return false;
+        }
+        if ((tableNode = document.getElementById('table'))) {
+            console.log('table has been previously created', table.difficulty);
+            difficulty = table.difficulty;
+        } 
+        newTable = new Table(21);
+        newTable.setUp();
+        newTable.difficulty = table.difficulty || difficulty;
+        newGame(newTable, newTable.difficulty);
+    }
+}
+
+function addDifficultyClicks(table) {
     var buttons = document.getElementsByClassName('difficulty');
     for (var i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', difficulty());
+        buttons[i].addEventListener('click', difficulty(table));
     }
     var start = document.getElementById('startgame');
-    start.addEventListener('click', startGame);
+    start.addEventListener('click', startGame(table));
 }
 
 table = new Table(21);
 table.setUp();
-addDifficultyClicks();
+addDifficultyClicks(table);

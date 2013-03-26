@@ -16,6 +16,34 @@ function createNode(name, attributes, childrenList) {
     return node;
 }
 
+function addMessage(message) {
+    var newMessage, oldMessage, messageNode, splitMessages, pNode;
+    if (message.indexOf('\n') !== -1) {
+        // if there is a line break in the message, create individual paragraph nodes for each line
+        splitMessages = message.split('\n');
+        newMessage = [];
+        for (var i = 0; i < splitMessages.length; i++) {
+            pNode = createNode('p', {'class': 'message'}, [splitMessages[i]])
+            console.log('p node', pNode);
+            newMessage.push(pNode);
+        }
+    } else {
+        pNode = createNode('p', {'class': 'message'}, [message]);
+        console.log('p node', pNode);
+        newMessage = [pNode];
+    }
+    console.log('new message', newMessage);
+    messageNode = document.getElementById('messages');
+    console.log('messages node', messageNode);
+
+    while (messageNode.firstChild) {
+        messageNode.removeChild(messageNode.firstChild);
+    }
+    for (var i = 0; i < newMessage.length; i++) {
+        messageNode.appendChild(newMessage[i]);
+    }
+}
+
 function cardToNode(card) {
     var CSSClasses = ['card'].concat(card.getValues()).join(' ');
     var numberNode = createNode('p', null, ['Number: ' + card['number']]);
@@ -55,11 +83,11 @@ function ifEnd(table) {
     } else {
         window.clearInterval(computerInterval);
         if (table.score === table.computerScore) {
-            alert('You tied: ' + table.score + ' to ' + table.computerScore);
+            addMessage('You tied: ' + table.score + ' to ' + table.computerScore);
         } else if (table.score > table.computerScore) {
-            alert('You won: ' + table.score + ' to ' + table.computerScore);
+            addMessage('You won: ' + table.score + ' to ' + table.computerScore);
         } else {
-            alert('The computer has won: ' + table.computerScore + ' to ' + table.score);
+            addMessage('The computer has won: ' + table.computerScore + ' to ' + table.score);
         }
     }
 }
@@ -67,14 +95,14 @@ function ifEnd(table) {
 function threeClickedCards(table, tableNode) {
     var clickedCards = table.clickedCards;
     if (isSet(clickedCards)) {
-        alert('That is a set!'); 
+        alert('That is a set!');
         table.updateAfterSet(clickedCards);
-        console.log('score: ', table.score, '\n', 'computer score: ', table.computerScore);
+        addMessage('You: ' + table.score + '\n' + 'Computer: ' + table.computerScore);
         renderDOM(table);
         ifEnd(table);
 
     } else {
-        alert('That is not a set.'); 
+        addMessage('That is not a set.'); 
     }
 }
 
@@ -108,9 +136,9 @@ function computerMove(table) {
         var move;
         if (table) {
             if ((move = getSet(table))) {
-                console.log('The computer got a set!');
+                alert('The computer got a set.');
                 table.updateAfterSet(move, 'computer');
-                console.log('score: ', table.score, '\n', 'computer score: ', table.computerScore);
+                addMessage(('You: ' + table.score + '\n' + 'Computer: ' + table.computerScore));
             } else {
                 table.addThree()
             }
@@ -121,7 +149,6 @@ function computerMove(table) {
 }
 
 function addAIToDOM(table, delayInSecs) {
-    console.log('delay', delayInSecs);
     computerInterval = window.setInterval(computerMove(table), delayInSecs * 1000);
 }
 

@@ -65,3 +65,15 @@ button {
     float: right;
     width: 91%
 }
+
+.messages {
+    clear: both;
+    float: right;
+    height: auto;
+    width: 15%;
+    text-align: center;
+}
+.messages p {
+    font-size: 200%;
+    font-weight: 900;
+}

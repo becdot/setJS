@@ -122,20 +122,24 @@ Table.prototype.unclickAllCards = function() {
 }
 
 Table.prototype.iterateTable = function(state) {
+    var i, j, k;
     var iUpperBound = this.table.length - 3;
     var jUpperBound = this.table.length - 2;
     var kUpperBound = this.table.length - 1;
     if (state === false) {
         return { "result": false, "state": false};
     }
-    if(typeof state !== "undefined") {
-        var i = state.i,
-            j = state.j,
-            k = state.k;
+    if(typeof state === "undefined") {
+        i = 0;
+        j = 1;
+        k = 2;
+    } else {
+        i = state.i;
+        j = state.j;
+        k = state.k;
         if (k === kUpperBound && j === jUpperBound && i === iUpperBound) {
             return { "result": [this.table[i], this.table[j], this.table[k]], "state": false};
-        }
-        if (k < kUpperBound) {
+        } else if (k < kUpperBound) {
             k++;
         } else if (k === kUpperBound && j < jUpperBound) {
             j++;
@@ -145,11 +149,6 @@ Table.prototype.iterateTable = function(state) {
             j = i + 1;
             k = j + 1;
         }
-
-    } else {
-        i = 0,
-        j = 1,
-        k = 2;
     }
     return { "result": [this.table[i], this.table[j], this.table[k]], "state": {"i": i, "j": j, "k": k }};
 };

@@ -4,6 +4,7 @@ function createNode(name, attributes, childrenList) {
         for (var name in attributes) {
             var value = attributes[name];
             node.setAttribute(name, value);
+;(function(exports) {
         }
     }
     for (var i = 0; i < childrenList.length; i++){
@@ -177,3 +178,4 @@ function newGame(table, delayInSecs) {
     renderDOM(table);
     addAIToDOM(table, delayInSecs);
 }
+})(this);

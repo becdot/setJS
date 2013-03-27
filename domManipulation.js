@@ -125,7 +125,7 @@ function whenCardClicked(table, card) {
         if (table.clickedCards.length === 3) {
             unhighlightAllCards(tableNode);
             threeClickedCards(table, tableNode);
-            table.unclickAllCards();         
+            table.unclickAllCards();
         }
     }
 }
@@ -170,7 +170,7 @@ function renderDOM(table) {
     }
     tableNode = createNode('div', {'class': 'table', 'id': 'table'}, []);
     tableNode.appendChild(fragment);
-    document.body.appendChild(tableNode); 
+    document.body.appendChild(tableNode);
 }
 
 function newGame(table, delayInSecs) {

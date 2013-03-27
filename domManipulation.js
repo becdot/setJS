@@ -5,6 +5,7 @@ function createNode(name, attributes, childrenList) {
             var value = attributes[name];
             node.setAttribute(name, value);
 ;(function(exports) {
+    var DomManipulation = {};
         }
     }
     for (var i = 0; i < childrenList.length; i++){
@@ -178,4 +179,5 @@ function newGame(table, delayInSecs) {
     renderDOM(table);
     addAIToDOM(table, delayInSecs);
 }
+    exports.DomManipulation = DomManipulation;
 })(this);

@@ -186,4 +186,8 @@ Table.prototype.iterateTable = function(state) {
     }
     return { "result": [this.table[i], this.table[j], this.table[k]], "state": {"i": i, "j": j, "k": k }};
 };
+
+    exports.Card = Card;
+    exports.Deck = Deck;
+    exports.Table = Table;
 })(this);

@@ -1,8 +1,11 @@
 // Card
-var cardValues = ['number', 'colour', 'shading', 'shape']
-var cardValuesDic = {'number': {1: 'one', 2: 'two', 3: 'three'}, 'colour': {1: 'red', 2: 'purple', 3: 'green'},
-                    'shading': {1: 'solid', 2: 'semi', 3: 'transparent'}, 'shape': {1: 'oval', 2: 'diamond', 3: 'squiggle'}};
-var cardMultiples = {'number': 1, 'colour': 10, 'shading': 100, 'shape': 1000};
+var cardParameters = {
+  'number': ['one', 'two', 'three'],
+  'colour': ['red', 'purple', 'green'],
+  'shading': ['solid', 'semi', 'transparent'],
+  'shape': ['oval', 'diamond', 'squiggle']
+};
+
 function Card() {
     this.id = null;
     this.sum = 0;

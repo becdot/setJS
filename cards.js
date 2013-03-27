@@ -114,9 +114,10 @@ Table.prototype.getSet = function(table) {
     return false;
 }
 Table.prototype.dealCard = function() {
-    var newCard;
-    if ((newCard = this.deck.deal()))
+    var newCard = this.deck.deal();
+    if (newCard !== undefined) {
         this.table.push(newCard);
+    }
 };
 Table.prototype.removeCards = function(cardList) {
     for (var i = 0; i < cardList.length; i++) {

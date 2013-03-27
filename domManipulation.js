@@ -100,7 +100,7 @@ function ifEnd(table) {
 
 function threeClickedCards(table, tableNode) {
     var clickedCards = table.clickedCards;
-    if (isSet(clickedCards)) {
+    if (Card.isSet(clickedCards)) {
         alert('That is a set!');
         table.updateAfterSet(clickedCards);
         addMessage('You: ' + table.score + '\n' + 'Computer: ' + table.computerScore);

@@ -52,8 +52,6 @@ function cardToNode(card) {
         var imageDiv = createNode('div', {'class': imageCSSClasses}, []);
         children.push(imageDiv);
     }
-    // var numberNode = createNode('p', null, ['Number: ' + card['number']]);
-    // var shapeNode = createNode('p', null, ['Shape: ' + card.getValues('shape')]);
     return createNode('div', {'class': cardCSSClasses}, children);
 }
 

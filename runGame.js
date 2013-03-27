@@ -27,7 +27,6 @@ function startGame(table) {
             window.clearInterval(computerInterval);
         }
         newTable = new Table(21);
-        newTable.setUp();
         newTable.difficulty = table.difficulty || difficulty;
         newGame(newTable, newTable.difficulty);
     }

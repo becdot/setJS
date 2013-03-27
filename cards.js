@@ -98,6 +98,9 @@ function Table(deckLength) {
     this.Deck = new Deck();
     this.Deck.setUp(deckLength);
     this.difficulty = null;
+    for (var i = 0; i < 12; i++) {
+        this.dealCard();
+    }
 };
 Table.prototype.getSet = function(table) {
     var state, cards, it;
@@ -116,11 +119,6 @@ Table.prototype.dealCard = function() {
     var newCard;
     if ((newCard = this.Deck.deal()))
         this.table.push(newCard);
-};
-Table.prototype.setUp = function() {
-    for (var i = 0; i < 12; i++) {
-        this.dealCard();
-    }  
 };
 Table.prototype.removeCards = function(cardList) {
     for (var i = 0; i < cardList.length; i++) {

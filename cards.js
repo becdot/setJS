@@ -55,7 +55,7 @@ Card.prototype.getValues = function() {
         return classes;
     } else {
         attr = arguments[0];
-        return cardValuesDic[attr][this[attr]];
+        return this[attr];
     }
 };
 

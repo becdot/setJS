@@ -13,6 +13,33 @@ function Card() {
         this[cardValues[i]] = null;
     }
 }
+
+var isAllowablePropertySet = function(prop1, prop2, prop3) {
+    if (prop1 === prop2 && prop1 === prop3) {
+        return true;
+    } else if (prop1 !== prop2 && prop1 !== prop3) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+Card.isSet = function(threeCards) {
+    if (threeCards.length !== 3) {
+        return false;
+    }
+
+    var card1 = threeCards[0];
+    var card2 = threeCards[1];
+    var card3 = threeCards[2];
+    for (var i in cardParameters) {
+        if (!isAllowablePropertySet(card1[i], card2[i], card3[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 Card.prototype.setRandomValues = function() {
     for (var i in cardValues) {
         var random = randomElement([1, 2, 3]);

@@ -42,5 +42,4 @@ function addDifficultyClicks(table) {
 }
 
 table = new Table(21);
-table.setUp();
 addDifficultyClicks(table);

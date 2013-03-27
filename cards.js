@@ -9,8 +9,8 @@ var cardParameters = {
 function Card() {
     this.id = null;
     this.sum = 0;
-    for (var i in cardValues) {
-        this[cardValues[i]] = null;
+    for (var i in cardParameters) {
+        this[i] = null;
     }
 }
 
@@ -41,20 +41,18 @@ Card.isSet = function(threeCards) {
 }
 
 Card.prototype.setRandomValues = function() {
-    for (var i in cardValues) {
-        var random = randomElement([1, 2, 3]);
-        var attr = cardValues[i];
-        this[attr] = random;
         this.sum += (cardMultiples[attr] * random);
+    for (var i in cardParameters) {
+        var random = randomElement(cardParameters[i]);
+        this[i] = random;
     }
 };
 Card.prototype.getValues = function() {
     var classes, attr;
     if (arguments.length === 0) {
         classes = [];
-        for (var i = 0; i < cardValues.length; i++) {
-            attr = cardValues[i];
-            classes.push(cardValuesDic[attr][this[attr]]);
+        for (var i in cardParameters) {
+            classes.push(this[i]);
         }
         return classes;
     } else {

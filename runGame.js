@@ -42,6 +42,6 @@ function addDifficultyClicks(table) {
     start.addEventListener('click', startGame(table));
 }
 
-table = new Table(21);
 addDifficultyClicks(table);
+    var table = new Table(21);
 })(this);

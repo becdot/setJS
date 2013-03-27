@@ -82,7 +82,7 @@ function unhighlightAllCards(tableNode) {
 
 
 function ifEnd(table) {
-    if (table.Deck.deck.length || table.getSet(table)) {
+    if (table.deck.deck.length || table.getSet(table)) {
         return false;
     } else {
         window.clearInterval(computerInterval);

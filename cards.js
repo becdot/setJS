@@ -94,7 +94,7 @@ function Table(deckLength) {
     this.clickedCards = [];
     this.score = 0;
     this.computerScore = 0;
-    this.Deck = new Deck(deckLength);
+    this.deck = new Deck(deckLength);
     this.difficulty = null;
     for (var i = 0; i < 12; i++) {
         this.dealCard();
@@ -115,7 +115,7 @@ Table.prototype.getSet = function(table) {
 }
 Table.prototype.dealCard = function() {
     var newCard;
-    if ((newCard = this.Deck.deal()))
+    if ((newCard = this.deck.deal()))
         this.table.push(newCard);
 };
 Table.prototype.removeCards = function(cardList) {

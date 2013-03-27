@@ -9,6 +9,7 @@ function difficulty(table) {
             table.difficulty = 30;
         } else {
             table.difficulty = 45;
+;(function(exports) {
         }
         console.log('difficulty', table.difficulty);
     }
@@ -43,3 +44,4 @@ function addDifficultyClicks(table) {
 
 table = new Table(21);
 addDifficultyClicks(table);
+})(this);

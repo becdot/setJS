@@ -8,7 +8,6 @@ var cardParameters = {
 
 function Card() {
     this.id = null;
-    this.sum = 0;
     for (var i in cardParameters) {
         this[i] = null;
     }
@@ -41,7 +40,6 @@ Card.isSet = function(threeCards) {
 }
 
 Card.prototype.setRandomValues = function() {
-        this.sum += (cardMultiples[attr] * random);
     for (var i in cardParameters) {
         var random = randomElement(cardParameters[i]);
         this[i] = random;

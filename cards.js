@@ -62,19 +62,8 @@ function randomElement(array) {
 }
 
 // Deck
-function Deck() {
+function Deck(deckLength) {
     this.deck = [];
-}
-Deck.prototype.shuffle = function() {
-    for (var i = 0; i < this.deck.length; i++) {
-        var randIndex = Math.floor(Math.random() * this.deck.length);
-        var card1 = this.deck[i];
-        var card2 = this.deck[randIndex];
-        this.deck[i] = card2;
-        this.deck[randIndex] = card1;
-    }  
-};
-Deck.prototype.setUp = function(deckLength) {
     for (var i = 0; i < deckLength; i++) {
         // way to have this set in one shot?  (have the Card initialisation set random values at start?)
         var card = new Card();
@@ -83,6 +72,16 @@ Deck.prototype.setUp = function(deckLength) {
         this.deck.push(card);
     }
     this.shuffle();
+
+}
+Deck.prototype.shuffle = function() {
+    for (var i = 0; i < this.deck.length; i++) {
+        var randIndex = Math.floor(Math.random() * this.deck.length);
+        var card1 = this.deck[i];
+        var card2 = this.deck[randIndex];
+        this.deck[i] = card2;
+        this.deck[randIndex] = card1;
+    }
 };
 Deck.prototype.deal = function() {
     if (this.deck)
@@ -95,8 +94,7 @@ function Table(deckLength) {
     this.clickedCards = [];
     this.score = 0;
     this.computerScore = 0;
-    this.Deck = new Deck();
-    this.Deck.setUp(deckLength);
+    this.Deck = new Deck(deckLength);
     this.difficulty = null;
     for (var i = 0; i < 12; i++) {
         this.dealCard();

@@ -162,7 +162,6 @@ Table.prototype.iterateTable = function(state) {
     if (state === false) {
         return { "result": false, "state": false};
     }
-<<<<<<< HEAD
     if(typeof state === "undefined") {
         i = 0;
         j = 1;

@@ -146,8 +146,8 @@ Table.prototype.clickCard = function(card) {
     this.clickedCards.push(card);
 }
 Table.prototype.unclickCard = function(card) {
-    var index;
-    if ((index = this.clickedCards.indexOf(card)) != -1)
+    var index = this.clickedCards.indexOf(card);
+    if (index != -1)
         this.clickedCards.splice(index, 1);
 }
 Table.prototype.unclickAllCards = function() {

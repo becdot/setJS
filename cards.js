@@ -1,3 +1,4 @@
+;(function(exports) {
 // Card
 var cardParameters = {
   'number': ['one', 'two', 'three'],
@@ -185,3 +186,4 @@ Table.prototype.iterateTable = function(state) {
     }
     return { "result": [this.table[i], this.table[j], this.table[k]], "state": {"i": i, "j": j, "k": k }};
 };
+})(this);

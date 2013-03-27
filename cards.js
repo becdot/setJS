@@ -121,6 +121,7 @@ Table.prototype.dealCard = function() {
 };
 Table.prototype.removeCards = function(cardList) {
     for (var i = 0; i < cardList.length; i++) {
+        // FYI: array indexOf is not supported in Internet Explorer 8 and below
         var cardIndex = this.table.indexOf(cardList[i]);
         if (cardIndex !== -1) {
             this.table.splice(cardIndex, 1);

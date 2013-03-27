@@ -162,13 +162,9 @@ Table.prototype.iterateTable = function(state) {
     if (state === false) {
         return { "result": false, "state": false};
     }
-    if(typeof state === "undefined") {
-        i = 0;
-        j = 1;
-        k = 2;
-    } else {
-        i = state.i;
-        j = state.j;
+    if (state !== undefined) {
+        i = state.i,
+        j = state.j,
         k = state.k;
         if (k === kUpperBound && j === jUpperBound && i === iUpperBound) {
             return { "result": [this.table[i], this.table[j], this.table[k]], "state": false};
@@ -182,6 +178,10 @@ Table.prototype.iterateTable = function(state) {
             j = i + 1;
             k = j + 1;
         }
+    } else {
+        i = 0;
+        j = 1;
+        k = 2;
     }
     return { "result": [this.table[i], this.table[j], this.table[k]], "state": {"i": i, "j": j, "k": k }};
 };

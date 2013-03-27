@@ -84,7 +84,7 @@ function unhighlightAllCards(tableNode) {
 
 
 function ifEnd(table) {
-    if (table.Deck.deck.length || getSet(table)) {
+    if (table.Deck.deck.length || table.getSet(table)) {
         return false;
     } else {
         window.clearInterval(computerInterval);
@@ -141,8 +141,8 @@ function computerMove(table) {
     return function() {
         var move;
         if (table) {
-            if ((move = getSet(table))) {
-                alert('The computer got a set.');
+            if ((move = table.getSet(table))) {
+                console.log('The computer got a set!');
                 table.updateAfterSet(move, 'computer');
                 addMessage(('You: ' + table.score + '\n' + 'Computer: ' + table.computerScore));
             } else {

@@ -46,16 +46,12 @@ Card.prototype.setRandomValues = function() {
     }
 };
 Card.prototype.getValues = function() {
-    var classes, attr;
     if (arguments.length === 0) {
-        classes = [];
+        var classes = [];
         for (var i in cardParameters) {
             classes.push(this[i]);
         }
         return classes;
-    } else {
-        attr = arguments[0];
-        return this[attr];
     }
 };
 

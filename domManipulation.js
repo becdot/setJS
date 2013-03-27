@@ -175,9 +175,11 @@ function renderDOM(table) {
     document.body.appendChild(tableNode);
 }
 
-function newGame(table, delayInSecs) {
-    renderDOM(table);
-    addAIToDOM(table, delayInSecs);
-}
+
+    DomManipulation.newGame = function(table, delayInSecs) {
+        renderDOM(table);
+        addAIToDOM(table, delayInSecs);
+    }
+
     exports.DomManipulation = DomManipulation;
 })(this);

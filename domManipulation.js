@@ -45,10 +45,16 @@ function addMessage(message) {
 }
 
 function cardToNode(card) {
-    var CSSClasses = ['card'].concat(card.getValues()).join(' ');
-    var numberNode = createNode('p', null, ['Number: ' + card['number']]);
-    var shapeNode = createNode('p', null, ['Shape: ' + card.getValues('shape')]);
-    return createNode('div', {'class': CSSClasses}, [numberNode, shapeNode]);
+    var cardCSSClasses = ['card'].concat(card.getValues()).join(' ');
+    var imageCSSClasses = ['image'].concat(card.getValues()).join(' ');
+    var children = [];
+    for (var i = 0; i < card.number; i++) {
+        var imageDiv = createNode('div', {'class': imageCSSClasses}, []);
+        children.push(imageDiv);
+    }
+    // var numberNode = createNode('p', null, ['Number: ' + card['number']]);
+    // var shapeNode = createNode('p', null, ['Shape: ' + card.getValues('shape')]);
+    return createNode('div', {'class': cardCSSClasses}, children);
 }
 
 function highlightCard(cardNode) {

@@ -5,55 +5,134 @@ body h1 {
     text-align: center;
 }
 .table {
-    width: 72%;
+    width: 74%;
     height: 100%;
     margin-left: 10%;
     margin-right: auto;
 }
 
 .card {
-    width: 28.5%;
-    height: 12%;
+    width: 260px;
+    height: 60px;
     float: left;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
     border: 1px solid #CCC;
     border-radius: 1em;
     margin: 1em;
 }
-.card p {
-    margin: .5em;
+
+.image {
+    height: 60px;
 }
-.card.red.solid {
-    background-color: rgba(255, 0, 0, 1);
+.image.one {
+    width: 65px;
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+    float: center;
+    margin: auto;
 }
-.card.red.semi {
-    background-color: rgba(255, 0, 0, .6);
+.image.two {
+    width: 65px;
+    background-size: 60px 60px; 
+    background-repeat: no-repeat;
+    background-position: center;
+    float: left;
+    margin: 0 32.5px 0 32.5px;
 }
-.card.red.transparent {
-    background-color: rgba(255, 0, 0, .2);
+.image.three {
+    width: 65px;
+    background-size: 60px 60px; 
+    background-repeat: no-repeat;
+    background-position: center;
+    float: left;
+    margin: 0 10px 0 10px;
 }
-.card.green.solid {
-    background-color: rgba(0, 128, 0, 1);
+.image.red.solid.oval {
+    background-image: url('images/redcircle.jpg')
 }
-.card.green.semi {
-    background-color: rgba(0, 128, 0, .6);
+.image.red.solid.diamond {
+    background-image: url('images/redsquare.jpg')
 }
-.card.green.transparent {
-    background-color: rgba(0, 128, 0, .2);
+.image.red.solid.squiggle {
+    background-image: url('images/redclover.jpg')
 }
-.card.purple.solid {
-    background-color: rgba(128, 0, 128, 1);
+.image.red.semi.oval {
+    background-image: url('images/redcirclestriped.jpg')
 }
-.card.purple.semi {
-    background-color: rgba(128, 0, 128, .6);
+.image.red.semi.diamond {
+    background-image: url('images/redsquarestriped.jpg')
 }
-.card.purple.transparent {
-    background-color: rgba(128, 0, 128, .2);
+.image.red.semi.squiggle {
+    background-image: url('images/redcloverstriped.jpg')
 }
+.image.red.transparent.oval {
+    background-image: url('images/redcircletransparent.jpg')
+}
+.image.red.transparent.diamond {
+    background-image: url('images/redsquaretransparent.jpg')
+}
+.image.red.transparent.squiggle {
+    background-image: url('images/redclovertransparent.jpg')
+}
+
+.image.green.solid.oval {
+    background-image: url('images/greencircle.jpg')
+}
+.image.green.solid.diamond {
+    background-image: url('images/greensquare.jpg')
+}
+.image.green.solid.squiggle {
+    background-image: url('images/greenclover.jpg')
+}
+.image.green.semi.oval {
+    background-image: url('images/greencirclestriped.jpg')
+}
+.image.green.semi.diamond {
+    background-image: url('images/greensquarestriped.jpg')
+}
+.image.green.semi.squiggle {
+    background-image: url('images/greencloverstriped.jpg')
+}
+.image.green.transparent.oval {
+    background-image: url('images/greencircletransparent.jpg')
+}
+.image.green.transparent.diamond {
+    background-image: url('images/greensquaretransparent.jpg')
+}
+.image.green.transparent.squiggle {
+    background-image: url('images/greenclovertransparent.jpg')
+}
+
+.image.purple.solid.oval {
+    background-image: url('images/purplecircle.jpg')
+}
+.image.purple.solid.diamond {
+    background-image: url('images/purplesquare.jpg')
+}
+.image.purple.solid.squiggle {
+    background-image: url('images/purpleclover.jpg')
+}
+.image.purple.semi.oval {
+    background-image: url('images/purplecirclestriped.jpg')
+}
+.image.purple.semi.diamond {
+    background-image: url('images/purplesquarestriped.jpg')
+}
+.image.purple.semi.squiggle {
+    background-image: url('images/purplecloverstriped.jpg')
+}
+.image.purple.transparent.oval {
+    background-image: url('images/purplecircletransparent.jpg')
+}
+.image.purple.transparent.diamond {
+    background-image: url('images/purplesquaretransparent.jpg')
+}
+.image.purple.transparent.squiggle {
+    background-image: url('images/purpleclovertransparent.jpg')
+}
+
 .card.selected {
-    font-weight: 900;
+    border: 1px solid black;
 }
 
 .buttondiv {

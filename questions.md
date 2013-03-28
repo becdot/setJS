@@ -17,6 +17,7 @@ To Do
 
   - Computer highlights cards when it makes a move
   - Highlighting = highlighting?
-  - Easy, medium, and hard modes (with html buttons)
   - Resize properly with window resizing
-  - 
+  - Buttons for opening screen -- easy, medium, and hard are different buttons (also prettier!)
+  - Check other browsers
+  - Solo mode

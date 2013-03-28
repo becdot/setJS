@@ -28,8 +28,8 @@ body h1 {
     background-size: 60px 60px;
     background-repeat: no-repeat;
     background-position: center;
-    float: center;
-    margin: auto;
+    float: left;
+    margin-left: 37.5%;
 }
 .image.two {
     width: 65px;

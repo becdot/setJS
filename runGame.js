@@ -1,7 +1,7 @@
 // Playing the game
 
 function difficulty(table) {
-    return function() {
+    return function(event) {
         var buttonID = event.currentTarget.getAttribute('id');
         if (buttonID === 'hard') {
             table.difficulty = 15;

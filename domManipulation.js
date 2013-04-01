@@ -27,12 +27,10 @@
             newMessage = [];
             for (var i = 0; i < splitMessages.length; i++) {
                 pNode = createNode('p', {'class': 'message'}, [splitMessages[i]])
-                console.log('p node', pNode);
                 newMessage.push(pNode);
             }
         } else {
             pNode = createNode('p', {'class': 'message'}, [message]);
-            console.log('p node', pNode);
             newMessage = [pNode];
         }
         console.log('new message', newMessage);
@@ -51,7 +49,8 @@
         var cardCSSClasses = ['card'].concat(card.getValues()).join(' ');
         var imageCSSClasses = ['image'].concat(card.getValues()).join(' ');
         var children = [];
-        for (var i = 0; i < card.number; i++) {
+        var cardNumber = card.numToInt();
+        for (var i = 0; i < cardNumber; i++) {
             var imageDiv = createNode('div', {'class': imageCSSClasses}, []);
             children.push(imageDiv);
         }
@@ -84,7 +83,7 @@
     }
 
     function ifEnd(table) {
-        if (table.deck.deck.length || table.getSet(table)) {
+        if (table.deck.deck.length || table.getSet()) {
             return false;
         } else {
             window.clearInterval(computerInterval);
@@ -139,7 +138,7 @@
         return function() {
             var move;
             if (table) {
-                if ((move = table.getSet(table))) {
+                if ((move = table.getSet())) {
                     console.log('The computer got a set!');
                     table.updateAfterSet(move, 'computer');
                     addMessage(('You: ' + table.score + '\n' + 'Computer: ' + table.computerScore));
@@ -168,9 +167,9 @@
             addCardClick(table, cardNode, cards[i]);
             fragment.appendChild(cardNode);
         }
-            tableNode = createNode('div', {'class': 'table', 'id': 'table'}, []);
-            tableNode.appendChild(fragment);
-            document.body.appendChild(tableNode);
+        tableNode = createNode('div', {'class': 'table', 'id': 'table'}, []);
+        tableNode.appendChild(fragment);
+        document.body.appendChild(tableNode);
     }
 
     DomManipulation.newGame = function(table, delayInSecs) {

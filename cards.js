@@ -17,7 +17,7 @@
     var isAllowablePropertySet = function(prop1, prop2, prop3) {
         if (prop1 === prop2 && prop1 === prop3) {
             return true;
-        } else if (prop1 !== prop2 && prop1 !== prop3) {
+        } else if (prop1 !== prop2 && prop1 !== prop3 && prop2 !== prop3) {
             return true;
         } else {
             return false;
@@ -28,7 +28,6 @@
         if (threeCards.length !== 3) {
             return false;
         }
-
         var card1 = threeCards[0];
         var card2 = threeCards[1];
         var card3 = threeCards[2];
@@ -55,6 +54,10 @@
             return classes;
         }
     };
+    Card.prototype.numToInt = function() {
+        return cardParameters['number'].indexOf(this.number) + 1;
+    };
+
 
     // Randomness
     function randomElement(array) {
@@ -101,10 +104,10 @@
             this.dealCard();
         }
     };
-    Table.prototype.getSet = function(table) {
+    Table.prototype.getSet = function() {
         var state, cards, it;
         while (state !== false) {
-            it = table.iterateTable(state);
+            it = this.iterateTable(state);
             state = it.state;
             cards = it.result;
             if (cards[0] && cards[1] && cards[2] && Card.isSet(cards)) {

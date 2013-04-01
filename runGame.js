@@ -28,7 +28,7 @@
             }
             newTable = new Table(21);
             newTable.difficulty = table.difficulty || difficulty;
-            DomManipulation.newGame(newTable, newTable.difficulty);
+            exports.DomManipulation.newGame(newTable, newTable.difficulty);
         }
     }
 

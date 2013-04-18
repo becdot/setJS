@@ -1,23 +1,16 @@
-Questions
-
-  - way to iterate over objects?
-  - way to iterate over ['colour', 'shading', 'shape'] in Card to set each of those in turn?
-  - better way to check equality of multiple values
-    `if (card1[attr] !== card2[attr] || card2[attr] !== card3[attr] || card3[attr] !=== card1[attr])`
-  - way to update multiple values of objects? e.g. `obj = {val1: 1, val2: 2}`
-  - what does the syntax `var anchor, fragment = document.createDocumentFragment();` mean?
-  - forEach vs. for (var i = 0; i < array.length; i++) vs. for (i in array)?
-  - why can't I set attributes for DOM nodes like element.class = 'card'?
-    - way to do this without setting it on the html?
-  - in whenCardClicked closure, why is function able to have access to event?  Where does it get that, since event isn't passed in as a parameter?
-
-
-
 To Do
 
   - Computer highlights cards when it makes a move
   - Highlighting = highlighting?
   - Resize properly with window resizing
   - Buttons for opening screen -- easy, medium, and hard are different buttons (also prettier!)
-  - Check other browsers
   - Solo mode
+  - Computer countdown (how much time before it makes a move)
+  - Prettier score display -- graphs?
+  - Striped cards have 50% intensity (instead of full intensity -- too much like solid cards)
+  - Remove alerts -- too annoying
+  - Have a list of sets along the edge of the screen, can see previous sets
+  - Have cards be snazzy and slide off the screen (visualisations)
+  - Better messaging to communicate when the computer has made a move
+  - Button to add another three cards (have to check that no sets exist, otherwise player can cheat)
+  - Alternatively, have a number that indicates the available sets on the board

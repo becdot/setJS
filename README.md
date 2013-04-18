@@ -1,4 +1,4 @@
-###A pattern-matching game based on the card game SET, written in totally vanilla Javascript.
+###A pattern-matching game writen purely in JavaScript, based on the card game SET.
 
 ####A brief primer on SET:
 - Each card has four attributes: number, colour, shading, and shape.  
@@ -14,4 +14,8 @@
         + All colours are the same
         + Two cards have diamonds and one has ovals
 
-Preview of the game can be found [here](http://htmlpreview.github.com/?https://github.com/becdot/jsset/blob/master/index.html)
+####Todos
+These can be found in todo.md
+
+####To play
+A preview of the game can be found [here](http://htmlpreview.github.com/?https://github.com/becdot/jsset/blob/master/index.html)

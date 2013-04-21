@@ -14,8 +14,9 @@
         + All colours are the same
         + Two cards have diamonds and one has ovals
 
+####To play
+The game can be played [here](http://ec2-54-244-180-72.us-west-2.compute.amazonaws.com/set/)
+
 ####Todos
 These can be found in todo.md
 
-####To play
-A preview of the game can be found [here](http://htmlpreview.github.com/?https://github.com/becdot/jsset/blob/master/index.html)
